@@ -2,6 +2,7 @@
 ## Description
 PetsAreKings, is an online application focused on connecting pet owners with loving pet-sitters. PetsAreKings allows users to search for a professional pet-sitter to come over to their homes or, instead, to leave their animals friends under the care of our pet lovers.
 
+
 ## API Endpoints
 
 All API Request must be prepended with /api            
@@ -20,32 +21,34 @@ GET    | /auth/check      | YES   | Auth Token check         | -                
 
 METHOD | ENDPOINT        | TOKEN | DESCRIPTION                   | POST PARAMS                                                      | RETURNS
 -------|-----------------|-------|-------------------------------|------------------------------------------------------------------|--------------------------------
-GET    | /user/profile   | YES   | Shows registered user profile |  -                                                               | name, surname, username, email, pets, Geolocation, avatar
-PUT    | /user/profile   | YES   | Update user profile           | name, surname, username, email, pets, Geolocation, avatar, role  | updated user data
-DELETE | /user/profile   | YES   | Deletes user profile          | password                                                         | confirmation of deleted user
-
-
-### Cate Profile Endpoints
-
-METHOD | ENDPOINT            | TOKEN | DESCRIPTION                   | POST PARAMS                                          | RETURNS
--------|-------------|-------|-------------------------------|--------------------------------------------------------------|--------------------------------
-GET    | /user/cat/profile   | YES   | Shows registered user profile |  -                                                   | name, age, avatar, comments, star, sociable, special, picture, race
-PUT    | /user/cat/profile   | YES   | Update user profile           | name, age, avatar, sociable, special, picture, race  | updated cat data
-DELETE | /user/cat/profile   | YES   | Deletes user profile          | password                                             | confirmation of deleted cat
-
-
-### Host Profile Endpoints
-
-METHOD | ENDPOINT             | TOKEN | DESCRIPTION                   | POST PARAMS                                     | RETURNS
--------|----------------------|-------|-------------------------------|-------------------------------------------------|--------------------------------
-GET    | /user/host/profile   | YES   | Shows registered user profile |  -                                              | username, email, address, house_type, star, picture, comments, services, pet_house_share, prices
-PUT    | /user/host/profile   | YES   | Update user profile           | username, email, address, house_type, star, picture, comments, services, pet_house_share, prices  | updated user data
-DELETE | /user/host/profile   | YES   | Deletes user profile          | password                                        | confirmation of deleted user
+GET    | /user/profile   | YES   | Shows registered user profile |  -                                                               | name, surname, username, pets, location, role, comment, booking, pictures
+PUT    | /user/profile   | YES   | Update user profile           | name, surname, username, email, pets, role                       | updated user data
+DELETE | /user/profile   | YES   | Delete user profile          | password                                                         | confirmation of deleted user
 
 
 ### User Endpoints
 
 METHOD | ENDPOINT         | TOKEN | DESCRIPTION                     | PARAMS                                          | RETURNS
 -------|------------------|-------|---------------------------------|-------------------------------------------------|----------------------------
-GET    | /users           | YES   | Finds host by geolocation       | query: search string                            | list of matching hosts
+GET    | /users           | YES   | Finds host and professional by location          | query: search string           | list of matching hosts
 GET    | /users/:userid   | YES   | Get user profile                | username                                        | user profile
+POST    | /user/pets      | YES   | Create pet profile              | name, specie, sociable, race                    | object with new pet id, name, specie, sociable, race
+PUT    | /user/:petid     | YES   | Update pet profile              | name, specie, sociable, race, picture           | updated pet data
+DELETE | /user/:petid     | YES   | Delete pet profile              | password                                        | confirmation of deleted pet
+
+### ADMIN-User Endpoints
+
+METHOD | ENDPOINT         | TOKEN | DESCRIPTION                     | PARAMS                                          | RETURNS
+-------|------------------|-------|---------------------------------|-------------------------------------------------|----------------------------
+PUT    | /users/:userid   | YES   | Update comment, rating, picture  | userid,                                        | updated user data
+DELETE | /users/:userid   | YES   | Delete user profile              | userid,                                        | confirmation of deleted user
+
+
+### HOST and PROFESSIONAL-User Endpoints
+
+METHOD | ENDPOINT         | TOKEN | DESCRIPTION                     | PARAMS                                          | RETURNS
+-------|------------------|-------|---------------------------------|-------------------------------------------------|----------------------------
+GET    | /users           | YES   | Finds host and professional by location          | query: search string           | list of matching hosts
+GET    | /users/:userid   | YES   | Get user profile                | username                                        | user profile
+POST    | /user/pets      | YES   | Create pet profile              | name, specie, sociable, race                    | object with new pet id, name, specie, sociable, race
+PUT    | /user/:petid     | YES   | Update pet profile              | name, specie, sociable, race, picture           | updated pet data
